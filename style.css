@@ -1,0 +1,91 @@
+/*
+Ecobrutalist theme
+
+          Shadow Black / Gunmetal / Dark Charcoal / Charcoal
+    cement  = {"#1b1610", "#2a3439", "#333333", "#36454f"},
+
+            Lime Green / Spring Green / Sea Green / Dark Green
+    green   = {"#32cd32", "#00daa1", "#2e8b57", "#006400"},
+*/
+html {
+    background-color: #006400;
+    font-family: "Kanit";
+}
+.header {
+    text-align: center;
+}
+
+.parent-board {
+    text-align: center;
+}
+
+.child-board {
+     background-color: #2a3439;
+    border: 2px solid #32cd32;
+    border-radius: 5px;
+    box-shadow:
+        /*inset -10px -10px 5px #1b1610,*/
+        30px 18px 1px #1b1610;
+    color: #32cd32;
+    display: inline-block;
+    margin: 20px;
+    padding: 20px;
+    vertical-align: middle;
+    text-align: left;
+    width: 40%;
+}
+
+.board {
+    background-color: #2a3439;
+    border: 2px solid #32cd32;
+    border-radius: 5px;
+    box-shadow:
+        /*inset -10px -10px 5px #1b1610,*/
+        30px 18px 1px #1b1610;
+    color: #32cd32;
+    margin-bottom: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+h2 {
+    font-family: "Aldrich";
+    font-size: 30px;
+    margin: 0px;
+    text-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid;
+    color: #32cd32;
+}
+
+button {
+    background-color: #2a3439;
+    border: 2px solid #32cd32;
+    border-radius: 25px;
+    color: #32cd32;
+    font-family: "Aldrich";
+    font-size: 30px;
+    height: 50px;
+    padding: 0px;
+    text-align: center;
+    text-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
+    width: 50px;
+}
+        
+button:hover {
+    background-color: #36454f;
+}
+
+button:active {
+    background-color: #1b1610;
+}
+
