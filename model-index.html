@@ -2,27 +2,28 @@
 <html lang="en-US">
     
     <head>
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <link href="style.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
         <title>Ajenta</title>
-        <script src="scripts/main.js" defer ></script>
-
+        <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     </head>
 
     <body>
 
         <header>
-            <div class="header">
-                <h1>LOGO</h1>
-                <h1>AJENTA</h1>
-            </div>
             <div class="board">
                 <h2>Month</h2>
             </div>
+            <div id="parentdiv">
+                <button hx-post="/clicked"
+                    hx-trigger="click"
+                    hx-target="#parentdiv"
+                    hx-swap="outerHTML">
+                    Click me
+                </button>
         </header>
 
         <main>

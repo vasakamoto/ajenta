@@ -50,6 +50,16 @@ html {
     padding: 20px;
 }
 
+h1 {
+    color: #32cd32;
+    font-family: "Aldrich";
+    font-size: 60px;
+    margin: 0px;
+    text-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
+}
+
 h2 {
     font-family: "Aldrich";
     font-size: 30px;
