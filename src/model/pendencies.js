@@ -1,1 +1,8 @@
-// select unfinished commitments to the current date for those which have deadlines and the unfinished regular commitments of the last months
+class Pendency {
+    constructor(name, deadline, finished, comments) {
+        this.name = name;
+        this.deadline = deadline;
+        this.finished = finished;
+        this.comments = comments;
+    }
+}
