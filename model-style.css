@@ -16,6 +16,7 @@ html {
 }
 
 .parent-board {
+    border: 2px solid #fff;
     text-align: center;
 }
 
@@ -43,11 +44,9 @@ html {
         /*inset -10px -10px 5px #1b1610,*/
         30px 18px 1px #1b1610;
     color: #32cd32;
-    margin-bottom: 30px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 30px;
+    margin : auto;
     padding: 20px;
+    width: 80%;
 }
 
 h1 {

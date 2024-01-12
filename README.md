@@ -2,6 +2,7 @@
 - [ ] Resketch the diagram to an higher fidelity screen
 - [ ] Proper documentation
 - [ ] Consider using full dates instead of months
+- [ ] Handle errors and exceptios (e.g. create db if doesn't exists, tables and so on) in database.js
 
 # Ajenta
 The objective of this project is to study HTML and CSS, and develop my own agenda to use in my daily routine.
