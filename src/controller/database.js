@@ -29,13 +29,30 @@ async function createTable(table) {
     const exists = await checkTable(table); 
     return new Promise((resolve, reject) => {
         if(table === chore && !exists) {
-            const sql = `CREATE TABLE ${table} (columns)`;
+            const sql = `CREATE TABLE ${table} (choreID INTEGER PRIMARY KEY AUTOINCREMENT,
+                quantity INTEGER NOT NULL,
+                finished INTEGER NOT NULL,
+                comments TEXT)`;
         }
         if(table === projects && !exists) {
-            const sql = `CREATE TABLE ${table} (columns)`;
+            const sqlProjects = `CREATE TABLE ${table} (projectID INTEGER PRIMARY KEY AUTOINCREMENT,
+                activities INTEGER NOT NULL,
+                finished INTEGER NOT NULL,
+                deadline TEXT,
+                comments TEXT)`;
+            const sqlActivities = `CREATE TABLE activities (activityID INTEGER PRIMARY KEY AUTOINCREMENT,
+                project INTEGER NOT NULL,
+                finished INTEGER NOT NULL,
+                deadline TEXT,
+                comments TEXT,
+                FOREIGN KEY (project)
+                REFERENCES projects (project))`;
+
         }
         if(table === logs && !exists) {
-            const sql = `CREATE TABLE ${table} (columns)`;
+            const sql = `CREATE TABLE ${table} (logID INTEGER PRIMARY KEY AUTOINCREMENT,
+                date TEXT NOT NULL,
+                comments TEXT)`;
         }
     })
 }
