@@ -30,17 +30,20 @@ async function createTable(table) {
     return new Promise((resolve, reject) => {
         if(table === chore && !exists) {
             const sql = `CREATE TABLE ${table} (choreID INTEGER PRIMARY KEY AUTOINCREMENT,
+                chore TEXT NOT NULL,
                 quantity INTEGER NOT NULL,
                 finished INTEGER NOT NULL,
                 comments TEXT)`;
         }
         if(table === projects && !exists) {
             const sqlProjects = `CREATE TABLE ${table} (projectID INTEGER PRIMARY KEY AUTOINCREMENT,
+                project TEXT NOT NULL,
                 activities INTEGER NOT NULL,
                 finished INTEGER NOT NULL,
                 deadline TEXT,
                 comments TEXT)`;
             const sqlActivities = `CREATE TABLE activities (activityID INTEGER PRIMARY KEY AUTOINCREMENT,
+                activity TEXT NOT NULL,
                 project INTEGER NOT NULL,
                 finished INTEGER NOT NULL,
                 deadline TEXT,
