@@ -14,49 +14,42 @@ async function connectDB() {
     });
 }
 
-async function checkTable(table) {
+async function initDB() {
     const db = await connectDB();
     const sql = `SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%'`;
-    return new Promise((resolve, reject) => {
-        db.each(sql, [], (err, row) => {
-            if(err) { reject(err); }
-            resolve(table === row.name);
+     return new Promise((resolve, reject) => {
+        db.all(sql, [], (err, rows) => {
+            if(err) { throw err; }
+            if(rows.length === 0) {
+                const sqlChores = `CREATE TABLE chores (choreID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    chore TEXT NOT NULL,
+                    quantity INTEGER NOT NULL,
+                    finished INTEGER NOT NULL,
+                    comments TEXT)`; 
+                const sqlProjects = `CREATE TABLE projects (projectID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    project TEXT NOT NULL,
+                    activities INTEGER NOT NULL,
+                    finished INTEGER NOT NULL,
+                    deadline TEXT,
+                    comments TEXT)`;
+                const sqlActivities = `CREATE TABLE activities (activityID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    activity TEXT NOT NULL,
+                    project INTEGER NOT NULL,
+                    finished INTEGER NOT NULL,
+                    deadline TEXT,
+                    comments TEXT,
+                    FOREIGN KEY (project)
+                    REFERENCES projects (project))`;
+                const sqlLogs = `CREATE TABLE logs (logID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    date TEXT NOT NULL,
+                    comments TEXT)`;
+                resolve(db.run(sqlChores)
+                .run(sqlProjects)
+                .run(sqlActivities)
+                .run(sqlLogs));
+            }
+            resolve("Not should happen");
         });
-    })
-}
-
-async function createTable(table) {
-    const exists = await checkTable(table); 
-    return new Promise((resolve, reject) => {
-        if(table === chore && !exists) {
-            const sql = `CREATE TABLE ${table} (choreID INTEGER PRIMARY KEY AUTOINCREMENT,
-                chore TEXT NOT NULL,
-                quantity INTEGER NOT NULL,
-                finished INTEGER NOT NULL,
-                comments TEXT)`;
-        }
-        if(table === projects && !exists) {
-            const sqlProjects = `CREATE TABLE ${table} (projectID INTEGER PRIMARY KEY AUTOINCREMENT,
-                project TEXT NOT NULL,
-                activities INTEGER NOT NULL,
-                finished INTEGER NOT NULL,
-                deadline TEXT,
-                comments TEXT)`;
-            const sqlActivities = `CREATE TABLE activities (activityID INTEGER PRIMARY KEY AUTOINCREMENT,
-                activity TEXT NOT NULL,
-                project INTEGER NOT NULL,
-                finished INTEGER NOT NULL,
-                deadline TEXT,
-                comments TEXT,
-                FOREIGN KEY (project)
-                REFERENCES projects (project))`;
-
-        }
-        if(table === logs && !exists) {
-            const sql = `CREATE TABLE ${table} (logID INTEGER PRIMARY KEY AUTOINCREMENT,
-                date TEXT NOT NULL,
-                comments TEXT)`;
-        }
     })
 }
 
@@ -83,7 +76,6 @@ async function selectEverything(table) {
             rows.push(row);
             resolve(rows);
         });
-        db.close();
     });
 }
 
@@ -137,4 +129,4 @@ async function deleteData(table, where) {
         });
 }
 
-export {  selectEverything, selectData, insertData, updateData, deleteData };
+export { selectEverything, selectData, insertData, updateData, deleteData, initDB };
