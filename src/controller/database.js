@@ -79,13 +79,13 @@ async function selectEverything(table) {
     });
 }
 
-async function selectData(table, variable, where) {
+async function selectData(table, column, where) {
     const db = await connectDB();
-    const sql = `SELECT * FROM ${table} WHERE ${variable} = "${where}"`;
+    const sql = `SELECT * FROM ${table} WHERE ${column} ${where}`;
     return new Promise((resolve, reject) => {
-        db.get(sql, [], (err, row) => {
+        db.all(sql, [], (err, rows) => {
             if(err) { throw err }
-            resolve(row);
+            resolve(rows);
         });
     });
 }
@@ -129,4 +129,4 @@ async function deleteData(table, where) {
         });
 }
 
-export { selectEverything, selectData, insertData, updateData, deleteData, initDB };
+export { selectEverything, selectData, insertData, updateData, deleteData, checkColumns, initDB };
