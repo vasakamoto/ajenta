@@ -11,12 +11,57 @@ html {
     background-color: #006400;
     font-family: "Kanit";
 }
+
+h1 {
+    color: #32cd32;
+    font-family: "Aldrich";
+    margin: 0px;
+    text-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
+}
+
+h2 {
+    font-family: "Aldrich";
+    margin: 0px;
+    text-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid;
+    color: #32cd32;
+}
+
+button {
+    background-color: #1b1610;
+    border: 2px solid #32cd32;
+    border-radius: 10px;
+    color: #32cd32;
+    font-family: "Aldrich";
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
+}
+        
+button:hover {
+    background-color: #202020;
+}
+
+button:active {
+    background-color: #1b1610;
+}
+
 .header {
     text-align: center;
 }
 
 .parent-board {
-    border: 2px solid #fff;
     text-align: center;
 }
 
@@ -44,57 +89,59 @@ html {
         /*inset -10px -10px 5px #1b1610,*/
         30px 18px 1px #1b1610;
     color: #32cd32;
-    margin : auto;
+    margin : 20px auto;
     padding: 20px;
     width: 80%;
 }
 
-h1 {
+.single-element {
+    background-color: #1b1610;
+    border-radius: 5px;
     color: #32cd32;
-    font-family: "Aldrich";
-    font-size: 60px;
-    margin: 0px;
-    text-shadow: 
-        1px 0px 8px #2e8b57,
-        -1px 0px 10px #006400;
+    margin : 20px auto;
+    padding: 20px;
+    width: 90%;
 }
 
-h2 {
-    font-family: "Aldrich";
-    font-size: 30px;
-    margin: 0px;
-    text-shadow: 
-        1px 0px 8px #2e8b57,
-        -1px 0px 10px #006400;
+.single-element:hover {
+    background-color: #202020;
 }
 
-hr {
-    border: none;
-    border-top: 2px solid;
-    color: #32cd32;
+.modal {
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+    background-color: rgb(0 0 0 / 30%);
+    display: none;
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }
 
-button {
+.modal-board {
+    animation-name: slideIn;
+    animation-duration: 0.8s;
     background-color: #2a3439;
     border: 2px solid #32cd32;
-    border-radius: 25px;
+    border-radius: 5px;
+    bottom: 30%;
     color: #32cd32;
-    font-family: "Aldrich";
-    font-size: 30px;
-    height: 50px;
-    padding: 0px;
-    text-align: center;
-    text-shadow: 
-        1px 0px 8px #2e8b57,
-        -1px 0px 10px #006400;
-    width: 50px;
-}
-        
-button:hover {
-    background-color: #36454f;
+    left: 20%;
+    margin : 20px auto;
+    padding: 20px;
+    position: fixed;
+    width: 60%;
 }
 
-button:active {
-    background-color: #1b1610;
+@keyframes slideIn {
+    from { bottom: -300px; opacity: 0 }
+    to { bottom: 30%; opacity: 1 }
 }
 
+@keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}

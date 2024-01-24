@@ -1,0 +1,33 @@
+div.modal-board#logs-put-modal
+    h2=log.date 
+    hr
+    br
+    form
+        input(
+            type="text" 
+            name="log" 
+            placeholder=`${log.comments}`
+        )
+        br
+        br
+        button(
+            hx-put=`/logs/${log.logID}` 
+            hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            type="submit"
+        ) Submit
+        button(
+            type="button"
+            hx-get="/"
+            hx-target="#logs-put-modal"
+            hx-swap="delete"
+            hx-trigger="click"
+            hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+        ) Cancel
+        button(
+            type="button"
+            hx-delete=`/logs/${log.logID}`
+            hx-target="#logs-put-modal"
+            hx-swap="delete"
+            hx-trigger="click"
+            hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+        ) Delete

@@ -1,0 +1,29 @@
+doctype html
+html(lang="en-US")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width")
+        link(rel="icon" href="data:,")
+        link(rel="stylesheet" href="./../../model-style.css" type="text/css")
+        link(href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
+        title bundinha
+        script(src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous")
+    body
+        header
+            include includes/header.pug            
+        main
+            include includes/main-pendencies.pug
+            div.parent-board
+                include includes/main-chores.pug
+                include includes/main-projects.pug
+            div(
+                id="logs-placeholder"
+                hx-get="/logs"
+                hx-trigger="load" 
+                hx-swap="outerHTML" 
+                hx-target="this"
+            )
+        footer
+            include includes/footer.pug
+        div.modal#modal-placeholder

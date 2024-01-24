@@ -3,6 +3,8 @@ import sqlite3 from "sqlite3";
 // TODO error handling for all functions (specially the disconnect function)
 // use the array parameters in the sqlite3 methods to pass variables to query instead of using placeholders
 // the values and where parameters in the update and delete function need to be enter as sql query format (e.g. column1 = value1, column2 = value 2, where column = value)
+// write a function to filter-search values
+
 const sqlite = sqlite3.verbose();
 
 async function connectDB() {
@@ -79,15 +81,26 @@ async function selectEverything(table) {
     });
 }
 
-async function selectData(table, column, where) {
+async function getID(table, where) {
     const db = await connectDB();
-    const sql = `SELECT * FROM ${table} WHERE ${column} ${where}`;
+    const sql = `SELECT * FROM ${table} WHERE ${where}`;
     return new Promise((resolve, reject) => {
-        db.all(sql, [], (err, rows) => {
-            if(err) { throw err }
-            resolve(rows);
+        db.get(sql, [], (err, row)  => {
+            if (err) { throw err }
+            resolve(row[0]);
         });
     });
+}
+
+async function selectByID(table, idColumn, id) {
+    const db = await connectDB();
+    const sql = `SELECT * FROM ${table} WHERE ${idColumn} = ${id}`;
+    return new Promise((resolve, reject) => {
+        db.get(sql, [], (err, row) => {
+            if(err) { throw err }
+            resolve(row);
+            })
+    })
 }
 
 async function insertData(table, values) {
@@ -129,4 +142,17 @@ async function deleteData(table, where) {
         });
 }
 
-export { selectEverything, selectData, insertData, updateData, deleteData, checkColumns, initDB };
+//    let whereValue = (search * 1) ? `= ${search * 1}` : `LIKE '${search}%'`;
+//    const columns = await db.checkColumns("logs");
+//    const query = [];
+//    columns.shift();
+//    for(let x in columns) {
+//        let found = await db.selectData("logs", columns[x], whereValue);
+//        if(found.length !== 0) {
+//            for(let y in found) {
+//                query.push(found[y]);
+//            }
+//        }
+//    }
+
+export { selectEverything, getID, selectByID, insertData, updateData, deleteData, checkColumns, initDB };

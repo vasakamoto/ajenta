@@ -1,0 +1,18 @@
+div.board#logs-board
+    h1 Logs
+    hr
+    each val in logs
+        div.single-element(
+            hx-get=`/logs/${val.logID}`
+            hx-target="#modal-placeholder"
+            hx-swap="innerHTML"
+            hx-trigger="click"
+            hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+        )!= `<h2>${val.date}</h2> <hr> <p>${val.comments}</p>`
+    button(
+        hx-get="/logs/0"
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    ) Add Log

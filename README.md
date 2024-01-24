@@ -1,8 +1,13 @@
 # TODO
 - [ ] Resketch the diagram to an higher fidelity screen
 - [ ] Proper documentation
-- [ ] Consider using full dates instead of months
+- [ ] Use the Date().valueOf() instead of using strings
+- [ ] Sort pendencies before rendering the response
+- [ ] Refactor models to match database tables
+- [ ] Filter/Active search function for database
 - [ ] Handle errors and exceptios (e.g. create db if doesn't exists, tables and so on) in database.js
+- [ ] Layout a div to put chores and projects together vertically oriented and this div to the right of pendencies
+- [ ] Use ESC to escape modals
 
 # Ajenta
 The objective of this project is to study HTML and CSS, and develop my own agenda to use in my daily routine.

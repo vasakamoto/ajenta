@@ -1,0 +1,26 @@
+div.modal-board#logs-post-modal
+    h2="NEW LOG"
+    hr
+    br
+    form(
+        hx-post="/logs"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+    )
+        input(
+            type="text" 
+            name="log" 
+        )
+        br
+        br
+        button(
+            type="submit"
+            hx-get="/logs"
+            hx-target="#logs-placeholder"
+            hx-swap="outerHTML"
+            hx-trigger="click"
+        ) Submit
+        button(
+            type="button"
+            hx-get="/"
+            hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+        ) Cancel
