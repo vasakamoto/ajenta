@@ -1,6 +1,7 @@
 class Activity {
-    constructor(name, projectID, finished, deadline, comments) {
-        this.name = name;
+    constructor(activityID, activity, projectID, finished, deadline, comments) {
+        this.activityID = activityID;
+        this.activity = activity;
         this.projectID = projectID;
         this.finished = finished;
         this.deadline = deadline;
@@ -9,8 +10,9 @@ class Activity {
 }
 
 class Project {
-    constructor(name, activities, finished, deadline, comments) {
-        this.name = name;
+    constructor(projectID, project, activities, finished, deadline, comments) {
+        this.projectID = projectID;
+        this.project = project;
         this.activities = activities;
         this.finished = finished;
         this.deadline = deadline;

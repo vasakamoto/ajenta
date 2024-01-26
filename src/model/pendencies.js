@@ -1,6 +1,6 @@
 class Pendency {
-    constructor(name, deadline, finished, comments) {
-        this.name = name;
+    constructor(pendecy, deadline, finished, comments) {
+        this.pendecy = pendecy;
         this.deadline = deadline;
         this.finished = finished;
         this.comments = comments;

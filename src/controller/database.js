@@ -23,29 +23,38 @@ async function initDB() {
         db.all(sql, [], (err, rows) => {
             if(err) { throw err; }
             if(rows.length === 0) {
-                const sqlChores = `CREATE TABLE chores (choreID INTEGER PRIMARY KEY AUTOINCREMENT,
+                const sqlChores = `CREATE TABLE chores (
+                    choreID TEXT PRIMARY KEY NOT NULL UNIQUE,
                     chore TEXT NOT NULL,
                     quantity INTEGER NOT NULL,
                     finished INTEGER NOT NULL,
-                    comments TEXT)`; 
-                const sqlProjects = `CREATE TABLE projects (projectID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    comments TEXT
+                )`; 
+                const sqlProjects = `CREATE TABLE projects (
+                    projectID TEXT PRIMARY KEY NOT NULL UNIQUE,
                     project TEXT NOT NULL,
                     activities INTEGER NOT NULL,
                     finished INTEGER NOT NULL,
                     deadline TEXT,
-                    comments TEXT)`;
-                const sqlActivities = `CREATE TABLE activities (activityID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    comments TEXT
+                )`;
+                const sqlActivities = `CREATE TABLE activities (
+                    activityID TEXT PRIMARY KEY NOT NULL UNIQUE,
                     activity TEXT NOT NULL,
                     project INTEGER NOT NULL,
                     finished INTEGER NOT NULL,
                     deadline TEXT,
                     comments TEXT,
                     FOREIGN KEY (project)
-                    REFERENCES projects (project))`;
-                const sqlLogs = `CREATE TABLE logs (logID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    REFERENCES projects (project)
+                )`;
+                const sqlLogs = `CREATE TABLE logs (
+                    logID TEXT PRIMARY KEY NOT NULL UNIQUE,
                     date TEXT NOT NULL,
-                    comments TEXT)`;
-                resolve(db.run(sqlChores)
+                    log TEXT
+                )`;
+                resolve(db
+                .run(sqlChores)
                 .run(sqlProjects)
                 .run(sqlActivities)
                 .run(sqlLogs));
@@ -106,12 +115,12 @@ async function selectByID(table, idColumn, id) {
 async function insertData(table, values) {
     const db = await connectDB();
     const columns = await checkColumns(table);
-    const columnsToInsert = [];
-    for(let index = 1; index < columns.length; index++) {
-        columnsToInsert[index-1] = columns[index];
-    }
-    columnsToInsert.join(", ");
-    const sql = `INSERT INTO ${table}(${columnsToInsert}) VALUES (${values})`;
+//    const columnsToInsert = [];
+//    for(let index = 1; index < columns.length; index++) {
+//        columnsToInsert[index-1] = columns[index];
+//    }
+//    columnsToInsert.join(", ");
+    const sql = `INSERT INTO ${table}(${columns}) VALUES (${values})`;
     return new Promise((resolve, reject) => {
         db.run(sql, [], (err) => {
         if(err) { throw err}

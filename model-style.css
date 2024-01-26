@@ -10,6 +10,10 @@ Ecobrutalist theme
 html {
     background-color: #006400;
     font-family: "Kanit";
+    /*box-shadow:
+        inset -10px 10px 100px #1b1610,
+        inset 10px -10px 100px #00daa1;
+    */
 }
 
 h1 {

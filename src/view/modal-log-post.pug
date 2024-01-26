@@ -1,0 +1,28 @@
+div.modal-board
+    h1 NEW LOG - #{day}
+    hr
+    br
+
+    form(
+    )
+        input(
+            type="text" 
+            name="log" 
+        )
+        br
+        br
+
+        button(
+            type="submit"
+            hx-post="/logs"
+            hx-target="#list-logs"
+            hx-swap="beforeend"
+            hx-trigger="click"
+            hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+        ) Submit
+
+        button(
+            type="button"
+            hx-get="/"
+            hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+        ) Cancel

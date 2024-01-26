@@ -5,7 +5,6 @@ import * as pendencies from "./src/controller/pendencies.js";
 
 console.log("\n\n\nInitializing Server...\n\n\n");
 await initDB();
-console.log(await initDB());
 
 const localHost = 8000;
 

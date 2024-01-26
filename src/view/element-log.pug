@@ -1,0 +1,9 @@
+div.single-element(
+    id=`${log.logID}`
+    hx-get=`/logs/${log.logID}`
+    hx-target="#modal-placeholder"
+    hx-swap="innerHTML"
+    hx-trigger="click"
+    hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+)!= `<h2>${log.date}</h2> <hr> <p>${log.log}</p>`
+

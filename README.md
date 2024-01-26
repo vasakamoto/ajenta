@@ -8,6 +8,8 @@
 - [ ] Handle errors and exceptios (e.g. create db if doesn't exists, tables and so on) in database.js
 - [ ] Layout a div to put chores and projects together vertically oriented and this div to the right of pendencies
 - [ ] Use ESC to escape modals
+- [ ] Refactor post functions (there is no necessity to access the db 3 times in the same function)
+    
 
 # Ajenta
 The objective of this project is to study HTML and CSS, and develop my own agenda to use in my daily routine.
