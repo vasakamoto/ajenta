@@ -1,0 +1,43 @@
+div.modal-board
+    div.modal-header
+        h1 NEW ACTIVITY:
+
+    hr
+
+    div.modal-body
+        form
+            label Activity name:
+            input(
+                type="text"
+                name="activity"
+            )
+
+            label Deadline:
+            input(
+                type="date"
+                name="deadline"
+                placeholder="MM/DD/YYYY"
+            )
+
+            label Comments:
+            textarea(
+                name="comments"
+                maxlength="150"
+            )
+
+            button(
+                type="submit"
+                hx-post=`/projects/${projectID}/activities`
+                hx-target=`#activity-${projectID}`
+                hx-swap="beforeend"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+    div.modal-footer

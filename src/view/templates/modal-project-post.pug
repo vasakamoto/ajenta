@@ -1,0 +1,44 @@
+div.modal-board
+    div.modal-header
+        h1 NEW PROJECT:
+
+    hr
+
+    div.modal-body
+        form
+            label Project name:
+            input(
+                type="text"
+                name="project"
+                maxlength="30"
+            )
+
+            label Deadline:
+            input(
+                type="date"
+                name="deadline"
+                placeholder="MM/DD/YYYY"
+            )
+
+            label Comments:
+            textarea(
+                name="comments"
+                maxlength="150"
+            )
+
+            button(
+                type="submit"
+                hx-post="/projects"
+                hx-target="#list-projects"
+                hx-swap="beforeend"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+    div.modal-footer

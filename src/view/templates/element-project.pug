@@ -1,0 +1,48 @@
+div.card(
+    id=`${project.projectID}`
+)
+    div.card-header(
+        hx-get=`/projects/${project.projectID}`
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    )
+        div.title
+            h3 #{project.project}
+        div.deadline
+            include ./../icons/calendar-upcoming.pug
+            h3 #{project.deadline}
+
+    hr
+
+    div.card-body(
+        hx-get=`/projects/${project.projectID}`
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    )
+        h3 Comments:
+        p #{project.comments}
+        h3 ACTIVITIES:
+
+    hr
+
+    div.activities(
+        id=`activity-${project.projectID}`
+        hx-get=`/projects/${project.projectID}/activities`
+        hx-target="this"
+        hx-swap="innerHTML"
+        hx-trigger="load"
+    )
+
+    div.card-footer
+        button(
+            type="button"
+            hx-get=`/projects/${project.projectID}/activities/new`
+            hx-target="#modal-placeholder"
+            hx-swap="innerHTML"
+            hx-trigger="click"
+            hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+        ) Add Activity

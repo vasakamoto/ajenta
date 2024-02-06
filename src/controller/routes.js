@@ -3,6 +3,7 @@ import * as chores from "./chores.js";
 import * as logs from "./logs.js";
 import * as projects from "./projects.js";
 import * as activities from "./activities.js";
+import * as header from "./header.js";
 
 const router = express.Router();
 
@@ -10,7 +11,9 @@ router.get("/pendencies", );
 
 router.get("/deadlines", );
 
-router.get("/monthly-commitments", )
+router.get("/monthly-commitments", );
+
+router.get("/header-date", header.getDate);
 
 router.get("/chores", chores.getAllChores);
 router.get("/chores/:id", chores.getChoreByID);
@@ -24,18 +27,17 @@ router.post("/projects", projects.postProject);
 router.put("/projects/:id", projects.putProject);
 router.delete("/projects/:id", projects.deleteProject);
 
-router.get("/activities", activities.getAllActivities);
-router.get("/activities/:id", activities.getActivityByID);
-router.post("/activities", activities.postActivity);
-router.put("/activities/:id", activities.putActivity);
-router.delete("/activities/:id", activities.deleteActivity);
+router.get("/projects/:projectid/activities", activities.getAllActivities);
+router.get("/projects/:projectid/activities/:activityid", activities.getActivityByID);
+router.get("/activities/:activityid", activities.getActivityByID);
+router.post("/projects/:projectid/activities", activities.postActivity);
+router.put("/activities/:activityid", activities.putActivity);
+router.delete("/activities/:activityid", activities.deleteActivity);
 
 router.get("/logs", logs.getAllLogs);
 router.get("/logs/:id", logs.getLogByID);
 router.post("/logs", logs.postLog);
 router.put("/logs/:id", logs.putLog);
 router.delete("/logs/:id", logs.deleteLog);
-
-router.get("/teste", logs.postLog);
 
 export { router }

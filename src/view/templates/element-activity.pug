@@ -1,0 +1,29 @@
+div.card(
+    id=`${activity.activityID}`
+)
+    div.card-header(
+        hx-get=`/activities/${activity.activityID}`
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    )
+        div.title
+            h3 #{activity.activity}
+        div.deadline
+            include ./../icons/calendar-upcoming.pug
+            h3 #{activity.deadline}
+
+    hr
+
+    div.card-body(
+        hx-get=`/activities/${activity.activityID}`
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    )
+        h3 Comments:
+        p #{activity.comments}
+
+    div.card-footer

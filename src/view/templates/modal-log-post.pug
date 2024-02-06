@@ -1,0 +1,31 @@
+div.modal-board
+    div.modal-header
+        h1 NEW LOG - #{day}
+
+    hr
+
+    div.modal-body
+        form
+            textarea(
+                name="log" 
+                maxlength="300"
+                rows="5"
+            )
+            br
+
+            button(
+                type="submit"
+                hx-post="/logs"
+                hx-target="#list-logs"
+                hx-swap="beforeend"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+    div.modal-footer

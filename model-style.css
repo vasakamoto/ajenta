@@ -16,7 +16,7 @@ html {
     */
 }
 
-h1 {
+h1, h2, h3 {
     color: #32cd32;
     font-family: "Aldrich";
     margin: 0px;
@@ -25,18 +25,62 @@ h1 {
         -1px 0px 10px #006400;
 }
 
-h2 {
+label {
+    display: block;
     font-family: "Aldrich";
-    margin: 0px;
+    font-size: 24px;
+    margin: 10px;
     text-shadow: 
         1px 0px 8px #2e8b57,
         -1px 0px 10px #006400;
+}
+
+input {
+    background-color: #1b1610;
+    border: 0px;
+    border-radius: 5px;
+    color: #32cd32;
+    font-family: "Aldrich";
+    font-size: 20px;
+    display: block;
+    margin: 10px auto;
+    overflow-wrap: break-word;
+    padding: 10px;
+    width: 90%;
+}
+
+textarea {
+    background-color: #1b1610;
+    border: 0px;
+    border-radius: 5px;
+    color: #32cd32;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto;
+    overflow-wrap: break-word;
+    padding: 10px;
+    width: 90%;
 }
 
 hr {
     border: none;
     border-top: 2px solid;
+    box-shadow: 
+        1px 0px 8px #2e8b57,
+        -1px 0px 10px #006400;
     color: #32cd32;
+}
+
+select {
+    background-color: #1b1610;
+    border: 0px;
+    border-radius: 5px;
+    color: #32cd32;
+    font-family: "Aldrich";
+    font-size: 20px;
+    height: 46px;
+    margin: 10px;
+    padding: 10px;
 }
 
 button {
@@ -61,25 +105,39 @@ button:active {
     background-color: #1b1610;
 }
 
-.header {
-    text-align: center;
+.deadline, .frequency {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.icon {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .parent-board {
     text-align: center;
 }
 
+.quantity {
+    background-color: #1b1610;
+    border: 0px;
+    border-radius: 5px;
+    color: #32cd32;
+    font-size: 20px;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    width: 30%;
+}
+
 .child-board {
-     background-color: #2a3439;
     border: 2px solid #32cd32;
     border-radius: 5px;
-    box-shadow:
-        /*inset -10px -10px 5px #1b1610,*/
-        30px 18px 1px #1b1610;
     color: #32cd32;
     display: inline-block;
-    margin: 20px;
-    padding: 20px;
     vertical-align: middle;
     text-align: left;
     width: 40%;
@@ -98,7 +156,7 @@ button:active {
     width: 80%;
 }
 
-.single-element {
+.card {
     background-color: #1b1610;
     border-radius: 5px;
     color: #32cd32;
@@ -107,9 +165,17 @@ button:active {
     width: 90%;
 }
 
-.single-element:hover {
+.card:hover {
     background-color: #202020;
 }
+
+.card-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 
 .modal {
     animation-name: fadeIn;
@@ -131,18 +197,18 @@ button:active {
     background-color: #2a3439;
     border: 2px solid #32cd32;
     border-radius: 5px;
-    bottom: 30%;
+    bottom: 10%;
     color: #32cd32;
-    left: 20%;
+    left: 30%;
     margin : 20px auto;
     padding: 20px;
     position: fixed;
-    width: 60%;
+    width: 40%;
 }
 
 @keyframes slideIn {
     from { bottom: -300px; opacity: 0 }
-    to { bottom: 30%; opacity: 1 }
+    to { bottom: 10%; opacity: 1 }
 }
 
 @keyframes fadeIn {

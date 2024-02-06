@@ -1,0 +1,71 @@
+div.modal-board
+    div.modal-header
+        h1 NEW CHORE:
+
+    hr
+
+    div.modal-body
+        form
+            label Chore name:
+            input(
+                type="text"
+                name="chore"
+                placeholder=`${chore.chore}`
+            )
+            
+            label Frequency:
+            input.quantity(
+                type="text"
+                name="quantity"
+                placeholder=`${chore.quantity}`
+            )
+
+            select(name="frequency")
+                option.option(value=`${chore.frequency}`) #{chore.frequency}
+                option.option(value="week") Week
+                option.option(value="month") Month
+                option.option(value="bimonth") Bimonth 
+                option.option(value="trimonth") Trimonth
+                option.option(value="semester") Semester
+                option.option(value="year") Year
+                option.option(value="only once") Only Once
+
+            label Times done:
+            input(
+                type="text"
+                name="finished"
+                placeholder=`${chore.finished}`
+            )
+
+            label Comments:
+            textarea(
+                name="comments"
+                maxlength="150"
+                rows="3"
+            )
+
+            button(
+                type="submit"
+                hx-put=`/chores/${chore.choreID}`
+                hx-target=`#${chore.choreID}`
+                hx-swap="outerHTML"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+            button(
+                type="button"
+                hx-delete=`/chores/${chore.choreID}`
+                hx-target=`#${chore.choreID}`
+                hx-swap="delete"
+                hx-trigger="click"
+                hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Delete
+
+    div.modal-footer

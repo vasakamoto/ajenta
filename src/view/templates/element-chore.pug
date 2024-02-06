@@ -1,0 +1,33 @@
+div.card
+    div.card-header(
+        id=`${chore.choreID}`
+        hx-get=`/chores/${chore.choreID}`
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    )
+        div.title
+            h3 #{chore.chore}
+        div.frequency
+            include ./../icons/cycle.pug
+            h3 #{chore.quantity}x #{chore.frequency}
+        div.frequency 
+            include ./../icons/done.pug
+            h3 #{chore.finished}x
+
+    hr
+
+    div.card-body(
+        id=`${chore.choreID}`
+        hx-get=`/chores/${chore.choreID}`
+        hx-target="#modal-placeholder"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+    )
+        h3 Comments:
+        p #{chore.comments}
+
+    div.card-footer(
+    )

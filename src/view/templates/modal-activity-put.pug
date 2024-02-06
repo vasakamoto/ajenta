@@ -1,0 +1,54 @@
+div.modal-board
+    div.modal-header
+        h1 #{activity.activity}:
+
+    hr
+
+    div.modal-body
+        form
+            label Activity name:
+            input(
+                type="text"
+                name="activity"
+                placeholder=`${activity.activity}`
+            )
+
+            label Deadline:
+            input(
+                type="date"
+                name="deadline"
+                placeholder=`${activity.deadline}`
+            )
+
+            label Comments:
+            textarea(
+                name="comments"
+                maxlength="150"
+                placeholder=`${activity.comments}`
+            )
+
+            button(
+                type="submit"
+                hx-put=`/activities/${activity.activityID}`
+                hx-target=`#${activity.activityID}`
+                hx-swap="outerHTML"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+            button(
+                type="button"
+                hx-delete=`/activities/${activity.activityID}`
+                hx-target=`#${activity.activityID}`
+                hx-swap="delete"
+                hx-trigger="click"
+                hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Delete
+
+    div.modal-footer

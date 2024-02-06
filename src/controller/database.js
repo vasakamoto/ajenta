@@ -26,6 +26,7 @@ async function initDB() {
                 const sqlChores = `CREATE TABLE chores (
                     choreID TEXT PRIMARY KEY NOT NULL UNIQUE,
                     chore TEXT NOT NULL,
+                    frequency TEXT NOT NULL,
                     quantity INTEGER NOT NULL,
                     finished INTEGER NOT NULL,
                     comments TEXT
@@ -35,22 +36,22 @@ async function initDB() {
                     project TEXT NOT NULL,
                     activities INTEGER NOT NULL,
                     finished INTEGER NOT NULL,
-                    deadline TEXT,
+                    deadline INTEGER,
                     comments TEXT
                 )`;
                 const sqlActivities = `CREATE TABLE activities (
                     activityID TEXT PRIMARY KEY NOT NULL UNIQUE,
                     activity TEXT NOT NULL,
-                    project INTEGER NOT NULL,
+                    projectID TEXT NOT NULL,
                     finished INTEGER NOT NULL,
-                    deadline TEXT,
+                    deadline INTEGER,
                     comments TEXT,
-                    FOREIGN KEY (project)
-                    REFERENCES projects (project)
+                    FOREIGN KEY (projectID)
+                    REFERENCES projects (projectID)
                 )`;
                 const sqlLogs = `CREATE TABLE logs (
                     logID TEXT PRIMARY KEY NOT NULL UNIQUE,
-                    date TEXT NOT NULL,
+                    date INTEGER NOT NULL,
                     log TEXT
                 )`;
                 resolve(db
@@ -79,6 +80,19 @@ async function checkColumns(table) {
 
 async function selectEverything(table) {
     const sql = `SELECT * FROM ${table}`;
+    const db = await connectDB();
+    const rows = [];
+    return new Promise((resolve, reject) => {
+        db.each(sql, [], (err, row) => {
+            if(err) { throw err }
+            rows.push(row);
+            resolve(rows);
+        });
+    });
+}
+
+async function selectWhere(table, where) {
+    const sql = `SELECT * FROM ${table} WHERE ${where}`;
     const db = await connectDB();
     const rows = [];
     return new Promise((resolve, reject) => {
@@ -151,17 +165,5 @@ async function deleteData(table, where) {
         });
 }
 
-//    let whereValue = (search * 1) ? `= ${search * 1}` : `LIKE '${search}%'`;
-//    const columns = await db.checkColumns("logs");
-//    const query = [];
-//    columns.shift();
-//    for(let x in columns) {
-//        let found = await db.selectData("logs", columns[x], whereValue);
-//        if(found.length !== 0) {
-//            for(let y in found) {
-//                query.push(found[y]);
-//            }
-//        }
-//    }
 
-export { selectEverything, getID, selectByID, insertData, updateData, deleteData, checkColumns, initDB };
+export { selectEverything, selectWhere, getID, selectByID, insertData, updateData, deleteData, checkColumns, initDB };

@@ -1,0 +1,54 @@
+div.modal-board
+    div.modal-header
+        h1 NEW CHORE:
+
+    hr
+
+    div.modal-body
+        form
+            label Chore name:
+            input(
+                type="text"
+                name="chore"
+                maxlength="30"
+            )
+            
+            label Frequency:
+            input.quantity(
+                type="text"
+                name="quantity"
+                placeholder="Times per"
+            )
+
+            select(name="frequency")
+                option.option(value="week") Week
+                option.option(value="month") Month
+                option.option(value="bimonth") Bimonth 
+                option.option(value="trimonth") Trimonth
+                option.option(value="semester") Semester
+                option.option(value="year") Year
+                option.option(value="only once") Only Once
+
+            label Comments:
+            textarea(
+                name="comments"
+                maxlength="150"
+                rows="3"
+            )
+
+            button(
+                type="submit"
+                hx-post="/chores"
+                hx-target="#list-chores"
+                hx-swap="beforeend"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+    div.modal-footer

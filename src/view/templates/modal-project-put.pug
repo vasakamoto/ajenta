@@ -1,0 +1,53 @@
+div.modal-board
+    div.modal-header
+        h1 #{project.project}:
+
+    hr
+
+    div.modal-body
+        form
+            label Project name:
+            input(
+                type="text"
+                name="project"
+                maxlength="30"
+            )
+
+            label Deadline:
+            input(
+                type="date"
+                name="deadline"
+                placeholder="MM/DD/YYYY"
+            )
+
+            label Comments:
+            textarea(
+                name="comments"
+                maxlength="150"
+            )
+
+            button(
+                type="submit"
+                hx-put=`/projects/${project.projectID}`
+                hx-target=`#${project.projectID}`
+                hx-swap="outerHTML"
+                hx-trigger="click"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Submit
+
+            button(
+                type="button"
+                hx-get="/"
+                hx-on::after-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Cancel
+
+            button(
+                type="button"
+                hx-delete=`/projects/${project.projectID}`
+                hx-target=`#${project.projectID}`
+                hx-swap="delete"
+                hx-trigger="click"
+                hx-on::before-request="document.getElementById('modal-placeholder').style.display='none'"
+            ) Delete
+
+    div.modal-footer

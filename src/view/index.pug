@@ -10,18 +10,63 @@ html(lang="en-US")
         title bundinha
         script(src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous")
     body
-        include includes/header.pug            
-
-        include includes/main-pendencies.pug
+        div.board(
+            hx-get="/header-date"
+            hx-target="this"
+            hx-swap="innerHTML"
+            hx-trigger="load"
+        )
 
         div.parent-board
-            include includes/main-chores.pug
-            include includes/main-projects.pug
+            dic.child-board
+                include includes/main-pendencies.pug
+
+            div.child-board
+                div.board
+                    h2 Chores
+                    hr
+                    br
+
+                    div.chores#list-chores(
+                        hx-get="/chores"
+                        hx-target="this"
+                        hx-swap="innerHTML"
+                        hx-trigger="load"
+                    )
+
+                    button(
+                        hx-get="/chores/new"
+                        hx-target="#modal-placeholder"
+                        hx-swap="innerHTML"
+                        hx-trigger="click"
+                        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+                    ) Add Chore
+
+                div.board
+                    h2 Projects
+                    hr
+                    br
+
+                    div.projects#list-projects(
+                        hx-get="/projects"
+                        hx-target="this"
+                        hx-swap="innerHTML"
+                        hx-trigger="load"
+                    )
+
+                    button(
+                        hx-get="/projects/new"
+                        hx-target="#modal-placeholder"
+                        hx-swap="innerHTML"
+                        hx-trigger="click"
+                        hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
+                    ) Add Project
 
         div.board
-            h1 Logs
+            h2 Logs
             hr
             br
+
             div.logs#list-logs(
                 hx-get="/logs"
                 hx-target="this"
@@ -29,7 +74,7 @@ html(lang="en-US")
                 hx-trigger="load"
             )
 
-            button#add-log(
+            button(
                 hx-get="/logs/new"
                 hx-target="#modal-placeholder"
                 hx-swap="innerHTML"

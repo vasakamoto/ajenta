@@ -1,42 +1,65 @@
 import * as db from "./database.js";
 import pug from "pug";
+import { v4 as uuid } from "uuid";
 import { Activity } from "./../model/projects.js";
 
-// TODO differenciate between a filter function and to select a specific database
-// TODO refactor selectData to checkColumns in it
-// TODO get everything by id
+// TODO get all activities from a project and associate with it instead of all activites
+// use the db.filter function to achieve this
 
 async function getAllActivities(req, res) {
-    const activities = await db.selectEverything("activities");
-    res.send(activities);
+    const projectID = `"${req.params.projectid}"`;
+    const where = ` projectID = ${projectID}`;
+    const activities = await db.selectWhere("activities", where);
+    console.log(activities);
+    const template = pug.compileFile("./src/view/templates/list-activities.pug");
+    const markup = template({activities});
+    res.send(markup);
 }
 
 async function getActivityByID(req, res) {
-    const { id } = req.params;
-    const activity = await db.selectByID("activities", "activityID", id);
-    res.send(activity);
+    const activityID = `"${req.params.activityid}"`;
+    const projectID = req.params.projectid;
+    if(activityID == `"new"`) {
+        const template = pug.compileFile("./src/view/templates/modal-activity-post.pug");
+        const markup = template({projectID});
+        res.send(markup);
+    }
+    else {
+        const activity = await db.selectByID("activities", "activityID", activityID);
+        const template = pug.compileFile("./src/view/templates/modal-activity-put.pug");
+        const markup = template({activity});
+        res.send(markup);
+    }
 }
 
 async function postActivity(req, res) {
-    const body = req.body.activity;
-    const activity = new Activity("testando atividades", 2, 1, "alguma data", "teste");
-    const values = `"${activity.name}", ${activity.projectID}, ${activity.finished}, "${activity.deadline}", "${activity.comments}"`;
+    let { activity, deadline, comments } = req.body;
+    const projectID = req.params.projectid;
+    const activityID = "a" + uuid();
+    activity = new Activity(activityID, activity, projectID, 0, deadline, comments);
+    const values = `"${activity.activityID}", "${activity.activity}", "${activity.projectID}", ${activity.finished}, "${activity.deadline}", "${activity.comments}"`;
     await db.insertData("activities", values);
-    res.send("ok");
+    const template = pug.compileFile("./src/view/templates/element-activity.pug");
+    const markup = template({activity});
+    res.send(markup);
 }
 
 async function putActivity(req, res) {
-    const { id } = req.params;
-    const activity = new Activity("Minha rola minha vida", 2, 0, "alguma data", "teste");
-    const values = `activity = "${activity.name}", project = ${activity.projectID}, finished = ${activity.finished}, deadline = "${activity.deadline}", comments = "${activity.comments}"`;
-    const where = `activityID = ${id}`;
+    const id = `"${req.params.activityid}"`;
+    let { activity, deadline, comments } = req.body;
+    const originalActivity = await db.selectByID("activities", "activityID", id);
+    const values =  `activity = "${activity}", projectID = "${originalActivity.projectID}", finished = ${originalActivity.finished}, deadline = "${deadline}", comments = "${comments}"`;
+    const where =  `activityID = ${id}`;
     await db.updateData("activities", values, where);
-    res.send("ok");
+    activity = await db.selectByID("activities", "activityID", id);
+    const template = pug.compileFile("./src/view/templates/element-activity.pug");
+    const markup = template({activity});
+    res.send(markup);
 }
 
 async function deleteActivity(req, res) {
-    const { id } = req.params;
-    const where = `activityID = ${id}`;
+    const id = `"${req.params.activityid}"`;
+    const where =  `activityID = ${id}`;
     await db.deleteData("activities", where);
     res.send("ok");
 }

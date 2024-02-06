@@ -1,42 +1,56 @@
 import * as db from "./database.js";
 import pug from "pug";
+import { v4 as uuid } from "uuid";
 import Chore from "./../model/chores.js";
-
-// TODO differenciate between a filter function and to select a specific database
-// TODO refactor selectData to checkColumns in it
-// TODO get everything by id
 
 async function getAllChores(req, res) {
     const chores = await db.selectEverything("chores");
-    res.send(chores);
+    const template = pug.compileFile("./src/view/templates/list-chores.pug");
+    const markup = template({chores});
+    res.send(markup);
 }
 
 async function getChoreByID(req, res) {
-    const { id } = req.params;
-    const chore = await db.selectByID("chores", "choreID", id);
-    res.send(chore);
+    const id = `"${req.params.id}"`;
+    if(id == `"new"`) {
+        const template = pug.compileFile("./src/view/templates/modal-chore-post.pug");
+        const markup = template({});
+        res.send(markup);
+    }
+    else {
+        const chore = await db.selectByID("chores", "choreID", id);
+        const template = pug.compileFile("./src/view/templates/modal-chore-put.pug");
+        const markup = template({chore});
+        res.send(markup);
+    }
 }
 
 async function postChore(req, res) {
-    const body = req.body.chore;
-    const chore = new Chore("Testando os afazeres", 34, 22, "teste");
-    const values = `"${chore.name}", ${chore.quantity}, ${chore.finished}, "${chore.comments}"`;
+    let { chore, quantity, frequency, comments } = req.body;
+    const id = "c" + uuid();
+    chore = new Chore(id, chore, frequency, quantity, 0, comments);
+    const values = `"${chore.choreID}", "${chore.chore}", "${chore.frequency}", ${chore.quantity}, ${chore.finished}, "${chore.comments}"`;
     await db.insertData("chores", values);
-    res.send("ok");
+    const template = pug.compileFile("./src/view/templates/element-chore.pug");
+    const markup = template({chore});
+    res.send(markup);
 }
 
 async function putChore(req, res) {
-    const { id } = req.params;
-    const chore = new Chore("testando a bilola mole", 34, 22, "teste");
-    const values = `chore = "${chore.name}", quantity = ${chore.quantity}, finished = ${chore.finished}, comments = "${chore.comments}"`;
-    const where = `choreID = ${id}`;
+    const id = `"${req.params.id}"`;
+    let { chore, quantity, frequency, finished, comments } = req.body;
+    const values =  `chore = "${chore}", frequency = "${frequency}", quantity = "${quantity}", finished = "${finished}", comments = "${comments}"`;
+    const where =  `choreID = ${id}`;
     await db.updateData("chores", values, where);
-    res.send("ok");
+    chore = await db.selectByID("chores", "choreID", id);
+    const template = pug.compileFile("./src/view/templates/element-chore.pug");
+    const markup = template({chore});
+    res.send(markup);
 }
 
 async function deleteChore(req, res) {
-    const { id } = req.params;
-    const where = `choreID = ${id}`;
+    const id = `"${req.params.id}"`;
+    const where =  `choreID = ${id}`;
     await db.deleteData("chores", where);
     res.send("ok");
 }
