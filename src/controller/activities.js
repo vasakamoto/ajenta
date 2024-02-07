@@ -10,7 +10,6 @@ async function getAllActivities(req, res) {
     const projectID = `"${req.params.projectid}"`;
     const where = ` projectID = ${projectID}`;
     const activities = await db.selectWhere("activities", where);
-    console.log(activities);
     const template = pug.compileFile("./src/view/templates/list-activities.pug");
     const markup = template({activities});
     res.send(markup);
@@ -35,6 +34,7 @@ async function getActivityByID(req, res) {
 async function postActivity(req, res) {
     let { activity, deadline, comments } = req.body;
     const projectID = req.params.projectid;
+    deadline = Date.parse(deadline);
     const activityID = "a" + uuid();
     activity = new Activity(activityID, activity, projectID, 0, deadline, comments);
     const values = `"${activity.activityID}", "${activity.activity}", "${activity.projectID}", ${activity.finished}, "${activity.deadline}", "${activity.comments}"`;

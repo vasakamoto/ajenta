@@ -1,15 +1,41 @@
 # TODO
-- [ ] Resketch the diagram to an higher fidelity screen
-- [ ] Proper documentation
-- [ ] Use the Date().valueOf() instead of using strings
-- [ ] Sort pendencies before rendering the response
+- [ ] Resketch the diagram
+- [ ] Use ESC to escape modals
+- [ ] Write proper documentation
+- [ ] Handle errors and exceptios
+- [ ] ? Create an analyses screen (to display delayed/late stuff, hours spent doing what, etc.)
+## DATABASE
 - [ ] Refactor models to match database tables
 - [ ] Filter/Active search function for database
-- [ ] Handle errors and exceptios (e.g. create db if doesn't exists, tables and so on) in database.js
-- [ ] Layout a div to put chores and projects together vertically oriented and this div to the right of pendencies
-- [ ] Use ESC to escape modals
-- [ ] Refactor post functions (there is no necessity to access the db 3 times in the same function)
+- [ ] Add finishedAt column
+- [ ] ? Create auxiliary tables to help with analyses
+## LOG
 - [ ] Validate input fields
+- [x] Use the Date().valueOf() instead of using strings
+- [ ] Have fields and categories for the daily log
+- [ ] The main screen display only the current log
+- [ ] Create a new screen to display only the logs, sorted by years or months
+## CHORES
+- [ ] Validate input fields
+- [ ] Send differents themes depending of the status (late, open, finished early)
+- [x] Use the Date().valueOf() instead of using strings
+## PROJECTS 
+- [ ] Validate input fields
+- [ ] Send differents themes depending of the status (late, open, finished early)
+- [x] Use the Date().valueOf() instead of using strings
+- [ ] Delete project deletes every activity
+- [ ] Have option to archive project
+- [ ] Archive projects when finished
+- [ ] Create a new screen for archived projects
+## ACTIVITIES
+- [ ] Validate input fields
+- [ ] Send differents themes depending of the status (late, open, finished early)
+- [x] Use the Date().valueOf() instead of using strings
+## PENDENCIES
+- [ ] Sort pendencies by deadline before rendering the response
+- [ ] Send differents themes depending of the status (late, open, finished early)
+- [ ] Pendent elements with checkbox to mark as finished (the only elements to be checked are the pendencies)
+- [ ] When finished, update pendent element and respective chore/project activity
     
 
 # Ajenta

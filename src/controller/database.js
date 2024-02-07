@@ -36,7 +36,8 @@ async function initDB() {
                     project TEXT NOT NULL,
                     activities INTEGER NOT NULL,
                     finished INTEGER NOT NULL,
-                    deadline INTEGER,
+                    deadlineEpoch INTEGER,
+                    deadlineDate TEXT,
                     comments TEXT
                 )`;
                 const sqlActivities = `CREATE TABLE activities (
@@ -44,14 +45,16 @@ async function initDB() {
                     activity TEXT NOT NULL,
                     projectID TEXT NOT NULL,
                     finished INTEGER NOT NULL,
-                    deadline INTEGER,
+                    deadlineEpoch INTEGER,
+                    deadlineDate TEXT,
                     comments TEXT,
                     FOREIGN KEY (projectID)
                     REFERENCES projects (projectID)
                 )`;
                 const sqlLogs = `CREATE TABLE logs (
                     logID TEXT PRIMARY KEY NOT NULL UNIQUE,
-                    date INTEGER NOT NULL,
+                    epoch INTEGER NOT NULL,
+                    date TEXT NOT NULL,
                     log TEXT
                 )`;
                 resolve(db

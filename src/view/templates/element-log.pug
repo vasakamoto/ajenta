@@ -1,18 +1,17 @@
 div.card(
+        id=`${log.logID}`
         hx-get=`/logs/${log.logID}`
         hx-target="#modal-placeholder"
         hx-swap="innerHTML"
         hx-trigger="click"
         hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
-    )
+)
     div.card-header
         h3 #{log.date}
 
     hr
 
-    div.card-body(
-        id=`${log.logID}`
-    )
+    div.card-body
         p #{log.log}
     
     div.card-footer
