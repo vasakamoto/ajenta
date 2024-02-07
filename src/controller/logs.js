@@ -7,10 +7,6 @@ import { epochToDate } from "./utils.js";
 async function getAllLogs(req, res) {
     const logs = await db.selectEverything("logs");
     console.log(logs)
-    for(let x of logs) {
-        x.date = epochToDate(x.date);
-    }
-    console.log(logs)
     const template = pug.compileFile("./src/view/templates/list-logs.pug");
     const markup = template({logs}); 
     res.send(markup);
@@ -27,7 +23,6 @@ async function getLogByID(req, res) {
     }
     else {
         const log = await db.selectByID("logs", "logID", id);
-        log.date = epochToDate(log.date);
         const template = pug.compileFile("./src/view/templates/modal-log-put.pug");
         const markup = template({log});
         res.send(markup);
@@ -37,10 +32,10 @@ async function getLogByID(req, res) {
 async function postLog(req, res) {
     let { log } = req.body;
     const id = "l" + uuid();
-    log = new Log(id, log);
-    const values = `"${log.logID}", "${log.date}", "${log.log}"`;
+    const epoch = new Date().valueOf();
+    log = new Log(id, log, epoch, epochToDate(epoch));
+    const values = `"${log.logID}", "${log.log}", ${log.epoch}, "${log.date}"`;
     await db.insertData("logs", values);
-    log.date = epochToDate(log.date);
     const template = pug.compileFile("./src/view/templates/element-log.pug");
     const markup = template({log});
     res.send(markup);
@@ -53,7 +48,6 @@ async function putLog(req, res) {
     const where =  `logID = ${id}`;
     await db.updateData("logs", values, where);
     log = await db.selectByID("logs", "logID", id);
-    log.date = epochToDate(log.date);
     const template = pug.compileFile("./src/view/templates/element-log.pug");
     const markup = template({log});
     res.send(markup);
@@ -62,7 +56,7 @@ async function putLog(req, res) {
 async function deleteLog(req, res) {
     const id = `"${req.params.id}"`;
     const where =  `logID = ${id}`;
-    const del = await db.deleteData("logs", where);
+    await db.deleteData("logs", where);
     res.send("ok");
 }
 

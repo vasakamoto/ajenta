@@ -4,10 +4,11 @@
 - [ ] Write proper documentation
 - [ ] Handle errors and exceptios
 - [ ] ? Create an analyses screen (to display delayed/late stuff, hours spent doing what, etc.)
+- [ ] ? Remove models (There is no necessity to create an object to use it as a model to store data in the DB)
 ## DATABASE
 - [ ] Refactor models to match database tables
 - [ ] Filter/Active search function for database
-- [ ] Add finishedAt column
+- [x] Add finishedAt column
 - [ ] ? Create auxiliary tables to help with analyses
 ## LOG
 - [ ] Validate input fields

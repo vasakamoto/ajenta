@@ -1,8 +1,9 @@
 export default class Log {
-    constructor(logID, log) {
+    constructor(logID, log, epoch, date) {
         this.logID = logID;
-        this.date = new Date().valueOf();
         this.log = log;
+        this.epoch = epoch;
+        this.date = date;
     }
 }
 
