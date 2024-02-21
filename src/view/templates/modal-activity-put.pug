@@ -1,20 +1,20 @@
 div.modal-board
     div.modal-header
-        h1 #{activity.activity}:
+        h1 EDIT PROJECT:
 
     hr
 
     div.modal-body
         form
             label Activity name:
-            input(
+            input.text(
                 type="text"
                 name="activity"
                 placeholder=`${activity.activity}`
             )
 
             label Deadline:
-            input(
+            input.date(
                 type="date"
                 name="deadline"
                 placeholder=`${activity.deadline}`

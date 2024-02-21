@@ -7,7 +7,7 @@ div.modal-board
     div.modal-body
         form
             label Chore name:
-            input(
+            input.text(
                 type="text"
                 name="chore"
                 placeholder=`${chore.chore}`
@@ -31,7 +31,7 @@ div.modal-board
                 option.option(value="only once") Only Once
 
             label Times done:
-            input(
+            input.text(
                 type="text"
                 name="finished"
                 placeholder=`${chore.finished}`

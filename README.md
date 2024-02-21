@@ -1,42 +1,55 @@
 # TODO
 - [ ] Resketch the diagram
-- [ ] Use ESC to escape modals
+- [ ] Press ESC to escape modals
+- [ ] Press enter to submit
 - [ ] Write proper documentation
 - [ ] Handle errors and exceptios
-- [ ] ? Create an analyses screen (to display delayed/late stuff, hours spent doing what, etc.)
+- [ ] Animations to fade out modals
+- [ ] Transition animations for body swap
+- [ ] Refactor html elements
 - [ ] ? Remove models (There is no necessity to create an object to use it as a model to store data in the DB)
+- [ ] ? Show in the boards headers number of activities done
+- [X] Refactor html input elements to have classes for diferent types
 ## DATABASE
 - [ ] Refactor models to match database tables
 - [ ] Filter/Active search function for database
-- [x] Add finishedAt column
 - [ ] ? Create auxiliary tables to help with analyses
+- [ ] ? Refactor the 'values' parameters to a tuple
 ## LOG
 - [ ] Validate input fields
-- [x] Use the Date().valueOf() instead of using strings
 - [ ] Have fields and categories for the daily log
 - [ ] The main screen display only the current log
-- [ ] Create a new screen to display only the logs, sorted by years or months
+- [ ] Display log with breakline
+- [ ] In the page-logs have an option to search
+- [ ] In the page-logs organize by years tabs, in the years tab organize by months "click-to-load" elements
 ## CHORES
 - [ ] Validate input fields
-- [ ] Send differents themes depending of the status (late, open, finished early)
-- [x] Use the Date().valueOf() instead of using strings
+- [ ] Send differents templates depending of the status (late, open, finished early)
+- [X] Insert check-box input element
+- [ ] Show check-box if chore is late or open, if finished don't display
 ## PROJECTS 
 - [ ] Validate input fields
-- [ ] Send differents themes depending of the status (late, open, finished early)
-- [x] Use the Date().valueOf() instead of using strings
-- [ ] Delete project deletes every activity
+- [ ] Send differents templates depending of the status (late, open, finished early)
 - [ ] Have option to archive project
 - [ ] Archive projects when finished
+- [ ] Store date when finished
 - [ ] Create a new screen for archived projects
+- [ ] Project without deadline
+- [X] Insert check-box input element
 ## ACTIVITIES
 - [ ] Validate input fields
-- [ ] Send differents themes depending of the status (late, open, finished early)
-- [x] Use the Date().valueOf() instead of using strings
+- [ ] Send differents templates depending of the status (late, open, finished early)
+- [X] Insert check-box input element
 ## PENDENCIES
 - [ ] Sort pendencies by deadline before rendering the response
 - [ ] Send differents themes depending of the status (late, open, finished early)
 - [ ] Pendent elements with checkbox to mark as finished (the only elements to be checked are the pendencies)
 - [ ] When finished, update pendent element and respective chore/project activity
+- [ ] Instead of checking every case with if statement, use an object to select each case
+## STATUS
+- [ ] Display some graphs and similar stuff
+## UTILS
+- [ ] Create function to verify the state of activities, projects and chores
     
 
 # Ajenta

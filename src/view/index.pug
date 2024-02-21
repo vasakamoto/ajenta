@@ -10,6 +10,25 @@ html(lang="en-US")
         title bundinha
         script(src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous")
     body
+        div.navbar
+            div.navbarItem
+                h2 Tasks
+            div.navbarItem(
+                hx-get="/navbar-logs"
+                hx-target="body"
+                hx-swap="innerHTML"
+                hx-trigger="click"
+            )
+                h2 Logs
+            div.navbarItem
+                h2 Projects
+            div.navbarItem
+                h2 Status
+            div.navbarItem
+                h2 Info
+
+        div.spacer
+
         div.board(
             hx-get="/header-date"
             hx-target="this"
@@ -81,7 +100,5 @@ html(lang="en-US")
                 hx-trigger="click"
                 hx-on::after-request="document.getElementById('modal-placeholder').style.display='block'"
             ) Add Log
-
-        include includes/footer.pug
 
         div.modal#modal-placeholder

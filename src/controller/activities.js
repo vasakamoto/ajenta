@@ -2,14 +2,16 @@ import * as db from "./database.js";
 import pug from "pug";
 import { v4 as uuid } from "uuid";
 import { Activity } from "./../model/projects.js";
+import { epochToDate } from "./utils.js";
 
 // TODO get all activities from a project and associate with it instead of all activites
 // use the db.filter function to achieve this
 
-async function getAllActivities(req, res) {
+async function getActivities(req, res) {
     const projectID = `"${req.params.projectid}"`;
     const where = ` projectID = ${projectID}`;
     const activities = await db.selectWhere("activities", where);
+    console.log(activities)
     const template = pug.compileFile("./src/view/templates/list-activities.pug");
     const markup = template({activities});
     res.send(markup);
@@ -34,10 +36,10 @@ async function getActivityByID(req, res) {
 async function postActivity(req, res) {
     let { activity, deadline, comments } = req.body;
     const projectID = req.params.projectid;
-    deadline = Date.parse(deadline);
+    deadline = new Date(deadline).valueOf();
     const activityID = "a" + uuid();
-    activity = new Activity(activityID, activity, projectID, 0, deadline, comments);
-    const values = `"${activity.activityID}", "${activity.activity}", "${activity.projectID}", ${activity.finished}, "${activity.deadline}", "${activity.comments}"`;
+    activity = new Activity(activityID, activity, projectID, 0, 0, 0, deadline, epochToDate(deadline), comments);
+    const values = `"${activity.activityID}", "${activity.activity}", "${activity.projectID}", ${activity.finished}, ${activity.finishedAtEpoch}, "${activity.finishedAtDate}", ${activity.deadlineEpoch}, "${activity.deadlineDate}", "${activity.comments}"`;
     await db.insertData("activities", values);
     const template = pug.compileFile("./src/view/templates/element-activity.pug");
     const markup = template({activity});
@@ -47,8 +49,9 @@ async function postActivity(req, res) {
 async function putActivity(req, res) {
     const id = `"${req.params.activityid}"`;
     let { activity, deadline, comments } = req.body;
+    deadline = new Date(deadline).valueOf();
     const originalActivity = await db.selectByID("activities", "activityID", id);
-    const values =  `activity = "${activity}", projectID = "${originalActivity.projectID}", finished = ${originalActivity.finished}, deadline = "${deadline}", comments = "${comments}"`;
+    const values =  `activity = "${activity}", finished = ${originalActivity.finished}, finishedAtEpoch = ${originalActivity.finishedAtEpoch}, finishedAtDate = "${originalActivity.finishedAtDate}", deadlineEpoch = ${deadline}, deadlineDate = "${epochToDate(deadline)}", comments = "${comments}"`;
     const where =  `activityID = ${id}`;
     await db.updateData("activities", values, where);
     activity = await db.selectByID("activities", "activityID", id);
@@ -64,6 +67,4 @@ async function deleteActivity(req, res) {
     res.send("ok");
 }
 
-export { getAllActivities, getActivityByID, postActivity, putActivity, deleteActivity }
-
-
+export { getActivities, getActivityByID, postActivity, putActivity, deleteActivity }

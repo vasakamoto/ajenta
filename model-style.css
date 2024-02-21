@@ -42,11 +42,8 @@ input {
     color: #32cd32;
     font-family: "Aldrich";
     font-size: 20px;
-    display: block;
     margin: 10px auto;
-    overflow-wrap: break-word;
     padding: 10px;
-    width: 90%;
 }
 
 textarea {
@@ -105,6 +102,41 @@ button:active {
     background-color: #1b1610;
 }
 
+.navbar {
+    align-items: center;
+    background-color: #1b1610;
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+    left: 0;
+    margin-bottom: 10%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.navbarItem {
+    align-items: center;
+    border-right: 2px solid #006400;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbarItem:hover {
+    background-color: #202020;
+}
+
+.navbarItem:active {
+    background-color: #2a3439;
+}
+
+.spacer {
+    height: 40px;
+    margin: 20px;
+}
+
 .deadline, .frequency {
     align-items: center;
     display: flex;
@@ -134,7 +166,6 @@ button:active {
 }
 
 .child-board {
-    border: 2px solid #32cd32;
     border-radius: 5px;
     color: #32cd32;
     display: inline-block;
@@ -149,7 +180,7 @@ button:active {
     border-radius: 5px;
     box-shadow:
         /*inset -10px -10px 5px #1b1610,*/
-        30px 18px 1px #1b1610;
+        20px 12px 1px #1b1610;
     color: #32cd32;
     margin : 20px auto;
     padding: 20px;
@@ -176,6 +207,26 @@ button:active {
     justify-content: space-between;
 }
 
+.card-footer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+input.text {
+    display: block;
+    overflow-wrap: break-word;
+    width: 90%;
+}
+
+input.date {
+    display: block;
+    width: 90%;
+}
+
+input.checkbox {
+}
 
 .modal {
     animation-name: fadeIn;

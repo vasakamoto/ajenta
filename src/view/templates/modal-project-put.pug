@@ -1,29 +1,30 @@
 div.modal-board
     div.modal-header
-        h1 #{project.project}:
+        h1 EDIT PROJECT:
 
     hr
 
     div.modal-body
         form
             label Project name:
-            input(
+            input.text(
                 type="text"
                 name="project"
                 maxlength="30"
+                placeholder=`${project.project}`
             )
 
             label Deadline:
-            input(
+            input.date(
                 type="date"
                 name="deadline"
-                placeholder="MM/DD/YYYY"
             )
 
             label Comments:
             textarea(
                 name="comments"
                 maxlength="150"
+                placeholder=`${project.comments}`
             )
 
             button(

@@ -29,6 +29,7 @@ async function activitiesBehindSchedule() {
     return pendentActivities;
 }
 
+// Use an object to select instead of using ifs
 async function choresBehindSchedule() {
     const chores = await db.selectEverything("chores");
     const pendentChores = [];

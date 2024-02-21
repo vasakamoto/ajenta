@@ -4,9 +4,14 @@ import { v4 as uuid } from "uuid";
 import Log from "./../model/logs.js";
 import { epochToDate } from "./utils.js";
  
+function pageLogs(req, res) {
+    const template = pug.compileFile("./src/view/templates/page-logs.pug")
+    const markup = template({});
+    res.send(markup);
+}
+
 async function getAllLogs(req, res) {
     const logs = await db.selectEverything("logs");
-    console.log(logs)
     const template = pug.compileFile("./src/view/templates/list-logs.pug");
     const markup = template({logs}); 
     res.send(markup);
@@ -60,4 +65,4 @@ async function deleteLog(req, res) {
     res.send("ok");
 }
 
-export { getAllLogs, getLogByID, postLog, putLog, deleteLog }
+export { pageLogs, getAllLogs, getLogByID, postLog, putLog, deleteLog }

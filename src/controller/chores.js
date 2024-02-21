@@ -48,6 +48,12 @@ async function putChore(req, res) {
     res.send(markup);
 }
 
+//Use pendencies to check if the chore is late or open
+async function finishedChore(req, res) {
+    const id = `"${req.params.id}"`;
+     
+}
+
 async function deleteChore(req, res) {
     const id = `"${req.params.id}"`;
     const where =  `choreID = ${id}`;
@@ -55,5 +61,4 @@ async function deleteChore(req, res) {
     res.send("ok");
 }
 
-export { getAllChores, getChoreByID, postChore, putChore, deleteChore }
-
+export { getAllChores, getChoreByID, postChore, putChore, finishedChore, deleteChore }
